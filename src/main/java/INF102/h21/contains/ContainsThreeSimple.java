@@ -2,6 +2,14 @@ package INF102.h21.contains;
 
 import java.util.List;
 
+/**
+ * Checks for duplicate triple of given element, by means of brute force.
+ * 
+ * Time complexity: O(n^3)
+ * 
+ * @author Sondre Bolland
+ *
+ */
 public class ContainsThreeSimple<T> implements IContainsThree<T> {
 
 	@Override
