@@ -27,7 +27,7 @@ public class Main {
 				String algorithmName = algorithm.getClass().getSimpleName();
 				System.out.printf("%-25s| time elapsed: %10d microseconds%n", algorithmName, timeElapsed);
 			}
-		}
+		}//kake
 		
 		/**
 		 * <code>algorithm</code> validates all tripple occurence integers
