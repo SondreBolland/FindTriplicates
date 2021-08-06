@@ -3,7 +3,7 @@ Given a list of elements and a specific element checks if it occurs (at least) t
 
 Code includes four different algorithms for doing this:
 * **ContainsThreeSimple**
-  * Simple solution: Tripple for-loop
+  * Simple solution: Triple for-loop (brute force)
   * Time Complexity: O(n<sup>3</sup>)
 * **ContainsThreeSorting**
   * Sorts the list of elements. Searches through the list until it finds the element and checks if the two next elements are equal.
