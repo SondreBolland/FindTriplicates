@@ -8,6 +8,8 @@ import java.util.List;
  * Sorts the list and searches for the given element
  * followed by (at least) two consecutive equal elements.
  * 
+ * Time complexity: O(n^2log(n))
+ * 
  * @author Sondre Bolland
  *
  */
@@ -16,6 +18,7 @@ public class ContainsThreeSorting<T extends Comparable<T>> implements IContainsT
 	@Override
 	public boolean containsThree(List<T> list, T element) {
 		Collections.sort(list);
+		// Iterate list to find element. Check if it followed by >= 3 equal elements
 		for (int i = 0; i < list.size() - 2; i++) {
 			T one = list.get(i);
 			if (one.equals(element)) {

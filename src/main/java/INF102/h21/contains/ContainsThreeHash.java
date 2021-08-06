@@ -7,6 +7,8 @@ import java.util.Map;
  * Checks for duplicate triple of given element. Records the frequencies of all numbers in HashMap.
  * Checks frequency of the given element with O(1) lookup time.
  * 
+ * Time complexity: O(n)
+ * 
  * @author Sondre Bolland
  *
  */

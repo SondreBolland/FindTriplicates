@@ -45,9 +45,10 @@ public class Main {
 		// elapsed
 		System.out.println("---Processing Algorithms---");
 		for (IContainsThree<Integer> algorithm : algorithmList) {
-			long timeElapsed = timeAlgorithm(algorithm);
+			long timeElapsedMicro = timeAlgorithm(algorithm) / 1000;
+			double timeElapsedSeconds = (timeElapsedMicro / 1000000.0);
 			String algorithmName = algorithm.getClass().getSimpleName();
-			System.out.printf("%-25s| time elapsed: %10d microseconds%n", algorithmName, timeElapsed);
+			System.out.printf("%-25s| time elapsed: %10d microseconds (%f seconds)%n", algorithmName, timeElapsedMicro, timeElapsedSeconds);
 		}
 	}
 
@@ -63,14 +64,15 @@ public class Main {
 		// Generate n lists of integers. Find all triplets and validate them with
 		// the selected algorithm. Time this process.
 		long startTime = System.nanoTime();
-		for (int i = 0; i < 100; i++) {
+		int nIterations = 1000;
+		for (int i = 0; i < nIterations; i++) {
 			List<Integer> integerList = generateListOfIntegers(N_INTEGERS, LOWERBOUND, UPPERBOUND);
 			List<Integer> knownThrees = getTripletOccurrences(integerList);
 			if (!validateTriplets(integerList, knownThrees, algorithm))
 				throw new IllegalStateException("This is a known element that occurs three times in the list");
 		}
 		long endTime = System.nanoTime();
-		long timeElapsed = (endTime - startTime) / 1000;
+		long timeElapsed = (endTime - startTime) / nIterations;
 		return timeElapsed;
 	}
 
