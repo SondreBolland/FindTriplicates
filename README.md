@@ -7,9 +7,9 @@ Code includes four different algorithms for doing this:
   * Time Complexity: O(n<sup>3</sup>)
 * **ContainsThreeSorting**
   * Sorts the list of elements. Searches through the list until it finds the element and checks if the two next elements are equal.
-  * Time Complexity: O(n<sup>2</sup>log(n))
+  * Time Complexity: O(nlog(n))
 * **ContainsThreeFrequency**
-  * Saves the frequencies of all numbers. Proceeds to search through frequency list for the given element and checks if the frequency is three (or higher).
+  * For each element in list iterate through the rest of the list and record the frequency of this element. If it occurs >= 3 return true.
   * Time Complexity: O(n<sup>2</sup>)
 * **ContainsThreeHash**
   * Records the frequencies of all numbers in HashMap. Checks frequency of the given element with O(1) lookup time.
