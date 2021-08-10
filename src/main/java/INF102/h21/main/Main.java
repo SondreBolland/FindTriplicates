@@ -8,13 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import INF102.h21.contains.ContainsThreeFrequency;
-import INF102.h21.contains.ContainsThreeHash;
 import INF102.h21.contains.ContainsThreeSimple;
-import INF102.h21.contains.ContainsThreeSorting;
 import INF102.h21.contains.IContainsThree;
-
-
 
 /**
  * Records the time of different algorithms for determining if a list contains
@@ -28,7 +23,7 @@ public class Main {
 	/**
 	 * Number of integers in generated list
 	 */
-	public static final int N_INTEGERS = 10000;
+	public static final int N_INTEGERS = 1000;
 	/**
 	 * Lower bound of integers in generated list
 	 */
@@ -42,9 +37,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		// Different implementations of containsThree method
-		List<IContainsThree<Integer>> algorithmList = Arrays.asList(new ContainsThreeHash<Integer>(),
-				new ContainsThreeSorting<Integer>(), new ContainsThreeFrequency<Integer>(),
-				new ContainsThreeSimple<Integer>());
+		// List<IContainsThree<Integer>> algorithmList = Arrays.asList(new ContainsThreeSimple<Integer>(), TODO: Add you own algorithm);
+		List<ContainsThreeSimple<Integer>> algorithmList = Arrays.asList(new ContainsThreeSimple<Integer>());
 
 		// Generate lists of integers with (and without) duplicate triple
 		System.out.println("---Generating Integer Lists---");
