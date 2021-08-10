@@ -10,5 +10,5 @@ public interface IContainsThree<T> {
 	 * @param element
 	 * @return true if list contains (at least) three of the given element, false if not
 	 */
-	public boolean containsThree(List<T> list, T element);
+	public T containsThree(List<T> list);
 }

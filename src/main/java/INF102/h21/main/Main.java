@@ -1,5 +1,6 @@
 package INF102.h21.main;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,6 +14,8 @@ import INF102.h21.contains.ContainsThreeSimple;
 import INF102.h21.contains.ContainsThreeSorting;
 import INF102.h21.contains.IContainsThree;
 
+
+
 /**
  * Records the time of different algorithms for determining if a list contains
  * (at least) three of a given element.
@@ -21,11 +24,11 @@ import INF102.h21.contains.IContainsThree;
  *
  */
 public class Main {
-	
+
 	/**
 	 * Number of integers in generated list
 	 */
-	public static final int N_INTEGERS = 200;
+	public static final int N_INTEGERS = 10000;
 	/**
 	 * Lower bound of integers in generated list
 	 */
@@ -33,65 +36,58 @@ public class Main {
 	/**
 	 * Upper bound of integers in generated list
 	 */
-	public static final int UPPERBOUND = 150;
+	public static final int UPPERBOUND = N_INTEGERS;
+	
+	public static DecimalFormat formatter = new DecimalFormat("#, ###");
 
 	public static void main(String[] args) {
 		// Different implementations of containsThree method
-		List<IContainsThree<Integer>> algorithmList = Arrays.asList(new ContainsThreeSimple<Integer>(),
-				new ContainsThreeFrequency<Integer>(), new ContainsThreeSorting<Integer>(),
-				new ContainsThreeHash<Integer>());
+		List<IContainsThree<Integer>> algorithmList = Arrays.asList(new ContainsThreeHash<Integer>(),
+				new ContainsThreeSorting<Integer>(), new ContainsThreeFrequency<Integer>(),
+				new ContainsThreeSimple<Integer>());
 
-		// Run containsThree of each algorithm for the known triplets and record time
-		// elapsed
+		// Generate lists of integers with (and without) duplicate triple
+		System.out.println("---Generating Integer Lists---");
+		List<List<Integer>> integerLists = new ArrayList<>();
+		int nLists = 10;
+		for (int i = 0; i < nLists; i++) {
+			if (i % 2 == 0)
+				integerLists.add(generateList(true));
+			else
+				integerLists.add(generateList(false));
+		}
+		System.out.printf("%slists generated with %selements each.%n%n",
+				formatter.format(nLists), formatter.format(N_INTEGERS));
+		
+		// Run containsThree of each algorithm on the generated lists.
+		// Record time of each algorithm for every list
 		System.out.println("---Processing Algorithms---");
 		for (IContainsThree<Integer> algorithm : algorithmList) {
-			long timeElapsedMicro = timeAlgorithm(algorithm) / 1000;
+			long timeElapsedMicro = timeAlgorithm(algorithm, integerLists) / 1000;
 			double timeElapsedSeconds = (timeElapsedMicro / 1000000.0);
 			String algorithmName = algorithm.getClass().getSimpleName();
-			System.out.printf("%-25s| time elapsed: %10d microseconds (%f seconds)%n", algorithmName, timeElapsedMicro, timeElapsedSeconds);
+			System.out.printf("%-27s| time elapsed: %10d microseconds (%f seconds)%n", algorithmName, timeElapsedMicro,
+					timeElapsedSeconds);
 		}
 	}
 
 	/**
-	 * <code>algorithm</code> validates all tripple occurence integers in a
+	 * <code>algorithm</code> validates all triple occurence integers in a
 	 * generated list, <code>nIntegers</code> times. Records the time spent
 	 * validating.
 	 * 
 	 * @param algorithm ContainsThree algorithm
-	 * @return long of microseconds spent validating
+	 * @param integerLists list of lists of integers to be searched for duplicate triples
+	 * @return long of nanoseconds spent validating
 	 */
-	public static long timeAlgorithm(IContainsThree<Integer> algorithm) {
-		// Generate n lists of integers. Find all triplets and validate them with
-		// the selected algorithm. Time this process.
+	public static long timeAlgorithm(IContainsThree<Integer> algorithm, List<List<Integer>> integerLists) {
 		long startTime = System.nanoTime();
-		int nIterations = 1000;
-		for (int i = 0; i < nIterations; i++) {
-			List<Integer> integerList = generateListOfIntegers(N_INTEGERS, LOWERBOUND, UPPERBOUND);
-			List<Integer> knownThrees = getTripletOccurrences(integerList);
-			if (!validateTriplets(integerList, knownThrees, algorithm))
-				throw new IllegalStateException("This is a known element that occurs three times in the list");
+		for (List<Integer> integerList : integerLists) {
+			algorithm.containsThree(integerList);
 		}
 		long endTime = System.nanoTime();
-		long timeElapsed = (endTime - startTime) / nIterations;
+		long timeElapsed = (endTime - startTime);
 		return timeElapsed;
-	}
-
-	/**
-	 * Check all known integers which occur (at least) three times in
-	 * <code>integerList</code> with <code>algorithm</code>
-	 * 
-	 * @param integerList full list of integers
-	 * @param knownThrees all known triplets in <code>integerList</code>
-	 * @param algorithm   ContainsThree algorithm to validate triplets
-	 * @return true if algorithm validated all know triplets, else false
-	 */
-	public static boolean validateTriplets(List<Integer> integerList, List<Integer> knownThrees,
-			IContainsThree<Integer> algorithm) {
-		for (Integer knownThree : knownThrees) {
-			if (!algorithm.containsThree(integerList, knownThree))
-				return false;
-		}
-		return true;
 	}
 
 	/**
@@ -103,12 +99,26 @@ public class Main {
 	 * @param upperbound of integers generated
 	 * @return list of integers generated
 	 */
-	public static List<Integer> generateListOfIntegers(int n, int lowerbound, int upperbound) {
+	public static List<Integer> generateList(boolean withTriplet) {
 		Random rand = new Random();
-		List<Integer> integerList = new ArrayList<>(n);
-		for (int i = 0; i < n; i++) {
-			int number = rand.nextInt(upperbound - lowerbound) + lowerbound;
-			integerList.add(number);
+		List<Integer> integerList = new ArrayList<>(N_INTEGERS);
+
+		while (integerList.size() < N_INTEGERS) {
+			int number = rand.nextInt(UPPERBOUND - LOWERBOUND) + LOWERBOUND;
+			if (!integerList.contains(number))
+				integerList.add(number);
+		}
+
+		if (withTriplet) {
+			int randNum = rand.nextInt(UPPERBOUND - LOWERBOUND) + UPPERBOUND;
+			List<Integer> randIndecies = new ArrayList<>();
+			while (randIndecies.size() < 3) {
+				int randIdx = rand.nextInt(N_INTEGERS);
+				if (!randIndecies.contains(randIdx)) {
+					integerList.set(randIdx, randNum);
+					randIndecies.add(randIdx);
+				}
+			}
 		}
 		return integerList;
 	}

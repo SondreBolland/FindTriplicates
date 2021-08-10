@@ -11,10 +11,10 @@ public class GenerateList {
 	
 	private static Random rand = new Random();
 	
-	public static void writeIntegerListToFile(String[] args) {
+	public static void main(String[] args) {
 		int nElements = 1000;
-		int lowerbound = -10000;
-		int upperbound = 100000;
+		int lowerbound = 0;
+		int upperbound = 1000;
 		
 		List<Integer> integerList = generateListOfIntegers(nElements, lowerbound, upperbound);
 		writeToFile("integerList.txt", integerList);

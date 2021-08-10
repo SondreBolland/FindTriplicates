@@ -15,7 +15,7 @@ import java.util.Map;
 public class ContainsThreeHash<T> implements IContainsThree<T> {
 
 	@Override
-	public boolean containsThree(List<T> list, T element) {
+	public T containsThree(List<T> list) {
 		Map<T, Integer> frequencies = new HashMap<>();
 		for (T e: list) {
 			if (frequencies.containsKey(e)) {
@@ -23,13 +23,13 @@ public class ContainsThreeHash<T> implements IContainsThree<T> {
 				if (frequency == 1)
 					frequencies.put(e, 2);
 				else
-					return true;
+					return e;
 			}
 			else {
 				frequencies.put(e, 1);
 			}
 		}
-		return false;
+		return null;
 	}
 
 }
