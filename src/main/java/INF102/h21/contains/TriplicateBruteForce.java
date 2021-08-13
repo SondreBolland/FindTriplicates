@@ -10,10 +10,10 @@ import java.util.List;
  * @author Sondre Bolland
  *
  */
-public class ContainsThreeSimple<T> implements IContainsThree<T> {
+public class TriplicateBruteForce<T> implements ITriplicate<T> {
 
 	@Override
-	public T containsThree(List<T> list) {
+	public T findTriplicate(List<T> list) {
 		int n = list.size();
 		for (int i = 0; i < n; i++) {
 			for (int j = i+1; j < n; j++) {

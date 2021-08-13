@@ -12,10 +12,10 @@ import java.util.Map;
  * @author Sondre Bolland
  *
  */
-public class ContainsThreeHash<T> implements IContainsThree<T> {
+public class TriplicateHash<T> implements ITriplicate<T> {
 
 	@Override
-	public T containsThree(List<T> list) {
+	public T findTriplicate(List<T> list) {
 		Map<T, Integer> frequencies = new HashMap<>();
 		for (T e: list) {
 			if (frequencies.containsKey(e)) {

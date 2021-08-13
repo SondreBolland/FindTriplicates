@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import INF102.h21.contains.ContainsThreeFrequency;
-import INF102.h21.contains.ContainsThreeHash;
-import INF102.h21.contains.ContainsThreeSimple;
-import INF102.h21.contains.ContainsThreeSorting;
-import INF102.h21.contains.IContainsThree;
+import INF102.h21.contains.TriplicateFrequency;
+import INF102.h21.contains.TriplicateHash;
+import INF102.h21.contains.TriplicateBruteForce;
+import INF102.h21.contains.TriplicateSorting;
+import INF102.h21.contains.ITriplicate;
 
 
 
@@ -42,9 +42,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		// Different implementations of containsThree method
-		List<IContainsThree<Integer>> algorithmList = Arrays.asList(new ContainsThreeHash<Integer>(),
-				new ContainsThreeSorting<Integer>(), new ContainsThreeFrequency<Integer>(),
-				new ContainsThreeSimple<Integer>());
+		List<ITriplicate<Integer>> algorithmList = Arrays.asList(new TriplicateHash<Integer>(),
+				new TriplicateSorting<Integer>(), new TriplicateFrequency<Integer>(),
+				new TriplicateBruteForce<Integer>());
 
 		// Generate lists of integers with (and without) duplicate triple
 		System.out.println("---Generating Integer Lists---");
@@ -62,7 +62,7 @@ public class Main {
 		// Run containsThree of each algorithm on the generated lists.
 		// Record time of each algorithm for every list
 		System.out.println("---Processing Algorithms---");
-		for (IContainsThree<Integer> algorithm : algorithmList) {
+		for (ITriplicate<Integer> algorithm : algorithmList) {
 			long timeElapsedMicro = timeAlgorithm(algorithm, integerLists) / 1000;
 			double timeElapsedSeconds = (timeElapsedMicro / 1000000.0);
 			String algorithmName = algorithm.getClass().getSimpleName();
@@ -76,14 +76,14 @@ public class Main {
 	 * generated list, <code>nIntegers</code> times. Records the time spent
 	 * validating.
 	 * 
-	 * @param algorithm ContainsThree algorithm
+	 * @param algorithm findTriplicate algorithm
 	 * @param integerLists list of lists of integers to be searched for duplicate triples
 	 * @return long of nanoseconds spent validating
 	 */
-	public static long timeAlgorithm(IContainsThree<Integer> algorithm, List<List<Integer>> integerLists) {
+	public static long timeAlgorithm(ITriplicate<Integer> algorithm, List<List<Integer>> integerLists) {
 		long startTime = System.nanoTime();
 		for (List<Integer> integerList : integerLists) {
-			algorithm.containsThree(integerList);
+			algorithm.findTriplicate(integerList);
 		}
 		long endTime = System.nanoTime();
 		long timeElapsed = (endTime - startTime);
@@ -129,7 +129,7 @@ public class Main {
 	 * @param list
 	 * @return list of integers occurring three times in the input list
 	 */
-	public static List<Integer> getTripletOccurrences(List<Integer> list) {
+	public static List<Integer> getTriplicates(List<Integer> list) {
 		List<Integer> threes = new ArrayList<>();
 		Map<Integer, Integer> frequencies = new HashMap<>();
 		for (Integer e : list) {

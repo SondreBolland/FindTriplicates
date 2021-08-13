@@ -1,9 +1,7 @@
 package INF102.h21.contains;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -16,10 +14,10 @@ import java.util.Set;
  * @author Sondre Bolland
  *
  */
-public class ContainsThreeFrequency<T> implements IContainsThree<T> {
+public class TriplicateFrequency<T> implements ITriplicate<T> {
 
 	@Override
-	public T containsThree(List<T> list) {
+	public T findTriplicate(List<T> list) {
 		Set<T> visited = new HashSet<>();
 		// Record frequency of all integers in list
 		for (int i = 0; i < list.size(); i++) {

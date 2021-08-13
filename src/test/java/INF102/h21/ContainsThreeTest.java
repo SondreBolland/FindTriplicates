@@ -12,8 +12,8 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
-import INF102.h21.contains.ContainsThreeSimple;
-import INF102.h21.contains.IContainsThree;
+import INF102.h21.contains.TriplicateBruteForce;
+import INF102.h21.contains.ITriplicate;
 
 public class ContainsThreeTest {
 	
@@ -31,7 +31,7 @@ public class ContainsThreeTest {
 	public static final int UPPERBOUND = N_INTEGERS*1000;
 	
 	// TODO: Initiate variable with own algorithm
-	IContainsThree<Integer> algorithm = new ContainsThreeSimple<>();
+	ITriplicate<Integer> algorithm = new TriplicateBruteForce<>();
 	/**
 	 * List of integers with at least one element occurring three times
 	 */
@@ -107,16 +107,18 @@ public class ContainsThreeTest {
 	@Test
 	public void knownThreeTest() {
 		for (Integer element: getTripletOccurrences(integerListWithTriplet)) {
-			Integer foundElement = algorithm.containsThree(integerListWithTriplet);
+			Integer foundElement = algorithm.findTriplicate(integerListWithTriplet);
 			if (element.equals(foundElement))
 				return;
 		}
 		fail();
 	}
 	
+	// TODO Known issue: The list can have randomly added the same number three times
+	// but it is unlikely. Can change if we want to spend time
 	@Test
 	public void noKnownThreeTest() {
-		Integer foundElement = algorithm.containsThree(integerListWithoutTriplet);
+		Integer foundElement = algorithm.findTriplicate(integerListWithoutTriplet);
 		assertEquals(foundElement, null);
 	}
 }
