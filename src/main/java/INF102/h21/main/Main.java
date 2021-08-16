@@ -3,9 +3,7 @@ package INF102.h21.main;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import INF102.h21.contains.TriplicateFrequency;
@@ -27,7 +25,7 @@ public class Main {
 	/**
 	 * Number of integers in generated list
 	 */
-	public static final int N_INTEGERS = 1000;
+	public static final int N_INTEGERS = 10000;
 	/**
 	 * Lower bound of integers in generated list
 	 */
