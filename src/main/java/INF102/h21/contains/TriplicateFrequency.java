@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Checks for duplicate triple of given element. Saves the frequencies of all
+ * Checks for triplicate of given element. Saves the frequencies of all
  * numbers. Proceeds to search through frequency list for the given element and
  * checks if the frequency is three (or higher).
  * 

@@ -72,13 +72,13 @@ public class Main {
 	}
 
 	/**
-	 * <code>algorithm</code> validates all triple occurence integers in a
-	 * generated list, <code>nIntegers</code> times. Records the time spent
-	 * validating.
+	 * Runs the given <code>algorithm</code> on several lists <code>integerLists</code>
+	 * to find any occurrence of a triplicate. Records the time spent to find/not find triplicates
+	 * in all the lists.
 	 * 
 	 * @param algorithm findTriplicate algorithm
-	 * @param integerLists list of lists of integers to be searched for duplicate triples
-	 * @return long of nanoseconds spent validating
+	 * @param integerLists list of lists of integers to be searched for triplicates
+	 * @return long of nanoseconds spent
 	 */
 	public static long timeAlgorithm(ITriplicate<Integer> algorithm, List<List<Integer>> integerLists) {
 		long startTime = System.nanoTime();
@@ -123,26 +123,4 @@ public class Main {
 		return integerList;
 	}
 
-	/**
-	 * Find all elements in list that occur (at least) three times
-	 * 
-	 * @param list
-	 * @return list of integers occurring three times in the input list
-	 */
-	public static List<Integer> getTriplicates(List<Integer> list) {
-		List<Integer> threes = new ArrayList<>();
-		Map<Integer, Integer> frequencies = new HashMap<>();
-		for (Integer e : list) {
-			if (frequencies.containsKey(e))
-				frequencies.put(e, frequencies.get(e) + 1);
-			else
-				frequencies.put(e, 1);
-		}
-		for (Integer e : list) {
-			if (frequencies.get(e) >= 3) {
-				threes.add(e);
-			}
-		}
-		return threes;
-	}
 }

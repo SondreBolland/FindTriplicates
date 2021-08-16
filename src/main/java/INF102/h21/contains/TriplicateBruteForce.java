@@ -3,7 +3,7 @@ package INF102.h21.contains;
 import java.util.List;
 
 /**
- * Checks for duplicate triple of given element, by means of brute force.
+ * Checks for triplicate of given element, by means of brute force.
  * 
  * Time complexity: O(n^3)
  * 

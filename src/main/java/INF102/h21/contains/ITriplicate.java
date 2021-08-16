@@ -5,7 +5,7 @@ import java.util.List;
 public interface ITriplicate<T> {
 
 	/**
-	 * Checks if <code>list</list> contains three of the same element
+	 * Find an element that occurs three times in <code>list</list>
 	 * @return If the list contains three of the same element then return this element
 	 * null if not
 	 */

@@ -15,7 +15,7 @@ import org.junit.Test;
 import INF102.h21.contains.TriplicateBruteForce;
 import INF102.h21.contains.ITriplicate;
 
-public class ContainsThreeTest {
+public class TriplicateTest {
 	
 	/**
 	 * Number of integers in generated list
