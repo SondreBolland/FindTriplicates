@@ -8,6 +8,9 @@ Code currently includes only one algorithm for doing this:
 
 ## Task
 Implement the ``ITriplicate`` interface. Write an algorithm which performs better than ``TriplicateBruteForce``.
+To see if your algorithm is correct run ``TriplicateTest``.
+
+Add your algorithm/class to the list of algorithms/classes in ``Main::main`` (line 39). Run ``Main`` to see how fast (or slow) your solution is compared to ``TriplicateBruteForce``.
 What time complexity does your algorithm have?
 
 
