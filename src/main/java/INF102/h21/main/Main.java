@@ -15,7 +15,6 @@ import INF102.h21.contains.TriplicateSorting;
 import INF102.h21.contains.ITriplicate;
 
 
-
 /**
  * Records the time of different algorithms for determining if a list contains
  * (at least) three of a given element.
@@ -28,7 +27,7 @@ public class Main {
 	/**
 	 * Number of integers in generated list
 	 */
-	public static final int N_INTEGERS = 10000;
+	public static final int N_INTEGERS = 1000;
 	/**
 	 * Lower bound of integers in generated list
 	 */
