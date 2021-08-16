@@ -41,7 +41,7 @@ public class Main {
 	public static DecimalFormat formatter = new DecimalFormat("#, ###");
 
 	public static void main(String[] args) {
-		// Different implementations of containsThree method
+		// Different implementations of findTriplicate method
 		List<ITriplicate<Integer>> algorithmList = Arrays.asList(new TriplicateHash<Integer>(),
 				new TriplicateSorting<Integer>(), new TriplicateFrequency<Integer>(),
 				new TriplicateBruteForce<Integer>());
