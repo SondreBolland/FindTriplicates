@@ -1,4 +1,4 @@
-# Find Triplet Duplicates
+# Find Triplicate
 Given a list of elements find an element that occurs (at least) three times.
 
 Code currently includes only one algorithm for doing this:
@@ -7,7 +7,10 @@ Code currently includes only one algorithm for doing this:
   * Time Complexity: O(n<sup>3</sup>)
 
 ## Task
-  
+Implement the ``ITriplicate`` interface. Write an algorithm which performs better than ``TriplicateBruteForce``.
+What time complexity does your algorithm have?
+
+
 ## Expected output
 ```
 ---Generating Integer Lists---
