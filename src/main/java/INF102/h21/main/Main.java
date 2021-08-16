@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import INF102.h21.contains.ContainsThreeSimple;
-import INF102.h21.contains.IContainsThree;
+import INF102.h21.contains.ITriplicate;
+import INF102.h21.contains.TriplicateBruteForce;
 
 /**
  * Records the time of different algorithms for determining if a list contains
@@ -32,15 +32,16 @@ public class Main {
 	 * Upper bound of integers in generated list
 	 */
 	public static final int UPPERBOUND = N_INTEGERS;
-	
+
 	public static DecimalFormat formatter = new DecimalFormat("#, ###");
 
 	public static void main(String[] args) {
-		// Different implementations of containsThree method
-		// List<IContainsThree<Integer>> algorithmList = Arrays.asList(new ContainsThreeSimple<Integer>(), TODO: Add you own algorithm);
-		List<ContainsThreeSimple<Integer>> algorithmList = Arrays.asList(new ContainsThreeSimple<Integer>());
+		// Different implementations of findTriplicate method
+		// List<ITriplicate<Integer>> algorithmList = Arrays.asList(new
+		// TriplicateBruteForce<Integer>(), TODO: Add you own algorithm);
+		List<TriplicateBruteForce<Integer>> algorithmList = Arrays.asList(new TriplicateBruteForce<Integer>());
 
-		// Generate lists of integers with (and without) duplicate triple
+		// Generate lists of integers with (and without) triplicates
 		System.out.println("---Generating Integer Lists---");
 		List<List<Integer>> integerLists = new ArrayList<>();
 		int nLists = 10;
@@ -50,13 +51,13 @@ public class Main {
 			else
 				integerLists.add(generateList(false));
 		}
-		System.out.printf("%slists generated with %selements each.%n%n",
-				formatter.format(nLists), formatter.format(N_INTEGERS));
-		
+		System.out.printf("%slists generated with %selements each.%n%n", formatter.format(nLists),
+				formatter.format(N_INTEGERS));
+
 		// Run containsThree of each algorithm on the generated lists.
 		// Record time of each algorithm for every list
 		System.out.println("---Processing Algorithms---");
-		for (IContainsThree<Integer> algorithm : algorithmList) {
+		for (ITriplicate<Integer> algorithm : algorithmList) {
 			long timeElapsedMicro = timeAlgorithm(algorithm, integerLists) / 1000;
 			double timeElapsedSeconds = (timeElapsedMicro / 1000000.0);
 			String algorithmName = algorithm.getClass().getSimpleName();
@@ -66,18 +67,18 @@ public class Main {
 	}
 
 	/**
-	 * <code>algorithm</code> validates all triple occurence integers in a
-	 * generated list, <code>nIntegers</code> times. Records the time spent
-	 * validating.
+	 * Runs the given <code>algorithm</code> on several lists
+	 * <code>integerLists</code> to find any occurrence of a triplicate. Records the
+	 * time spent to find/not find triplicates in all the lists.
 	 * 
-	 * @param algorithm ContainsThree algorithm
-	 * @param integerLists list of lists of integers to be searched for duplicate triples
-	 * @return long of nanoseconds spent validating
+	 * @param algorithm    findTriplicate algorithm
+	 * @param integerLists list of lists of integers to be searched for triplicates
+	 * @return long of nanoseconds spent
 	 */
-	public static long timeAlgorithm(IContainsThree<Integer> algorithm, List<List<Integer>> integerLists) {
+	public static long timeAlgorithm(ITriplicate<Integer> algorithm, List<List<Integer>> integerLists) {
 		long startTime = System.nanoTime();
 		for (List<Integer> integerList : integerLists) {
-			algorithm.containsThree(integerList);
+			algorithm.findTriplicate(integerList);
 		}
 		long endTime = System.nanoTime();
 		long timeElapsed = (endTime - startTime);
@@ -117,26 +118,4 @@ public class Main {
 		return integerList;
 	}
 
-	/**
-	 * Find all elements in list that occur (at least) three times
-	 * 
-	 * @param list
-	 * @return list of integers occurring three times in the input list
-	 */
-	public static List<Integer> getTripletOccurrences(List<Integer> list) {
-		List<Integer> threes = new ArrayList<>();
-		Map<Integer, Integer> frequencies = new HashMap<>();
-		for (Integer e : list) {
-			if (frequencies.containsKey(e))
-				frequencies.put(e, frequencies.get(e) + 1);
-			else
-				frequencies.put(e, 1);
-		}
-		for (Integer e : list) {
-			if (frequencies.get(e) >= 3) {
-				threes.add(e);
-			}
-		}
-		return threes;
-	}
 }
