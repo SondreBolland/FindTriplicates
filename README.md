@@ -6,7 +6,7 @@ Code includes four different algorithms for doing this:
   * Simple solution: Triple for-loop (brute force)
   * Time Complexity: O(n<sup>3</sup>)
 * **TriplicateFrequency**
-  Checks for triplicate of given element. Saves the frequencies of all numbers. Proceeds to search through frequency list for the given element and checks if the frequency is three (or higher).
+  * Checks for triplicate of given element. Saves the frequencies of all numbers. Proceeds to search through frequency list for the given element and checks if the frequency is three (or higher).
   * Time Complexity: O(n<sup>2</sup>)
 * **TriplicateSorting**
   * Sorts the list of elements. Searches through the list and checks if it is equals to the next two elements in the list.
