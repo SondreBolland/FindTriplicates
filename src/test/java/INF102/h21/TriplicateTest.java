@@ -114,8 +114,6 @@ public class TriplicateTest {
 		fail();
 	}
 	
-	// TODO Known issue: The list can have randomly added the same number three times
-	// but it is unlikely. Can change if we want to spend time
 	@Test
 	public void noKnownThreeTest() {
 		Integer foundElement = algorithm.findTriplicate(integerListWithoutTriplet);
